@@ -7,13 +7,11 @@
 * state manage with provider state management
 ## Screenshots
 
-
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 ![App Screenshot]( https://ibb.co/Mczb1qw)
 
-![App Screenshot]( https://ibb.co/m5Mhdb7)
-![App Screenshot]( https://ibb.co/DYyt4RZ)
-![App Screenshot]( https://ibb.co/jfCgZpD)
-![App Screenshot]( https://ibb.co/D5WNjwR)
-![App Screenshot]( https://ibb.co/kX20LJz)
-![App Screenshot]( https://ibb.co/D9F4821)
+![App Screenshot]( https://github.com/CyberCadence/Budget-Tracker-app-with-dark-mode-/blob/main/101.png?raw=true)
+![App Screenshot]( https://github.com/CyberCadence/Budget-Tracker-app-with-dark-mode-/blob/main/102.png?raw=true)
+![App Screenshot](https://github.com/CyberCadence/Budget-Tracker-app-with-dark-mode-/blob/main/103.png?raw=true)
+![App Screenshot]( https://github.com/CyberCadence/Budget-Tracker-app-with-dark-mode-/blob/main/106.png?raw=true)
