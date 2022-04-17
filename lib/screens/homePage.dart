@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                               ),
                               Text(
                                 "Budget: \$" + value.budget.toString(),
-                                style: const TextStyle(fontSize: 10),
+                                style: const TextStyle(fontSize: 25),
                               ),
                             ],
                           ),
