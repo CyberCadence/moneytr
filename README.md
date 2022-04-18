@@ -4,7 +4,9 @@
  * A simple budget tracker app  made with flutter.
 * Dual UI mode with dark mode enabled.
 * Shared preference  for  dark mode  settings
-* state manage with provider state management
+* state management with provider state management
+* Hive DB enabled
+* Singleton pattern used 
 ## Screenshots
 
 
