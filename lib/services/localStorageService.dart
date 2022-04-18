@@ -5,7 +5,7 @@ class localStorageService {
   static const String transactionBoxKey = "transactionBox";
   static const String balanceBoxKey = "balanceBoxKey";
   static const String budgetBoxKey = "budgetBoxKey";
-
+  static const String deleteitem = "deleteitem";
   static final localStorageService _instance = localStorageService._internal();
 
   factory localStorageService() {
@@ -24,6 +24,7 @@ class localStorageService {
     await Hive.openBox(balanceBoxKey);
     await Hive.openBox(transactionBoxKey);
     await Hive.openBox(budgetBoxKey);
+    await Hive.openBox(deleteitem);
   }
 
   void saveTransactionItem(TransactionItem transaction) {
@@ -37,13 +38,13 @@ class localStorageService {
 
   ///save?get balance method
 
-  Future<void> saveBalance(TransactionItem item) async {
+  Future<void> saveBalance(TransactionItem value) async {
     final balanceBox = Hive.box<double>(balanceBoxKey);
     final currentBalance = balanceBox.get("balance") ?? 0.0;
-    if (item.isExpense) {
-      balanceBox.put("balance", currentBalance + item.amount);
+    if (value.isExpense) {
+      balanceBox.put("balance", currentBalance + value.amount);
     } else {
-      balanceBox.put("balance", currentBalance - item.amount);
+      balanceBox.put("balance", currentBalance - value.amount);
     }
   }
 
@@ -60,5 +61,18 @@ class localStorageService {
 
   Future<void> saveBudget(double value) {
     return Hive.box<double>(budgetBoxKey).put("budget", value);
+  }
+
+  void deleteTransactionitem(TransactionItem item) {
+    final transactions = Hive.box<TransactionItem>(transactionBoxKey);
+    final Map<dynamic, TransactionItem> map = transactions.toMap();
+    dynamic
+        desiredkey; // for checking each  key item in map ,wheater this one is to delete
+    map.forEach((key, value) {
+      if (value.itemTitle == item.itemTitle) item = key;
+    });
+    transactions.delete(desiredkey);
+
+    saveBalance(item);
   }
 }

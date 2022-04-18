@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moneytr/viewModel/budgetSviewModel.dart';
+import 'package:provider/provider.dart';
 import 'transactionItem.dart';
 
 class TransactionCard extends StatelessWidget {
@@ -23,8 +25,16 @@ class TransactionCard extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         width: MediaQuery.of(context).size.width,
         child: Row(
-          children: [
-            Text(
+          children: [ const Text('delete '),const Spacer(),TextButton(onPressed: () {
+            final budgetviewModel=Provider.of<BudgetViewModel>(context,listen: false);
+            budgetviewModel.deleteItem(item);
+            Navigator.pop(context);
+          }, child: const Text('yes'),), TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("No"))
+            ,Text(
             item.itemTitle,
               style: const TextStyle(
                 fontSize: 18,

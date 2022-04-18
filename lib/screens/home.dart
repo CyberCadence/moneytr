@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneytr/screens/homePage.dart';
 import 'package:moneytr/screens/profilePage.dart';
-import 'package:moneytr/services/budgetService.dart';
+import 'package:moneytr/viewModel/budgetSviewModel.dart';
 import 'package:moneytr/services/theme_services.dart';
 import 'package:moneytr/widgets/addTransaction.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class _HomeeState extends State<Homee> {
                     builder: (context) {
                       return addBudgetWidget(budgettoAdd: (budget) {
                         final budgetService =
-                            Provider.of<BudgetService>(context, listen: false);
+                            Provider.of<BudgetViewModel>(context, listen: false);
                         budgetService.budget = budget;
                       });
                     });

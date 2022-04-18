@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moneytr/screens/home.dart';
 
-import 'package:moneytr/services/budgetService.dart';
+import 'package:moneytr/viewModel/budgetSviewModel.dart';
 import 'package:moneytr/services/localStorageService.dart';
 
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<ThemeService>(
               create: (_) => ThemeService(sharedPreferences)),
-          ChangeNotifierProvider<BudgetService>(create: (_) => BudgetService())
+          ChangeNotifierProvider<BudgetViewModel>(create: (_) => BudgetViewModel())
         ],
         child: Builder(
           builder: (BuildContext context) {
