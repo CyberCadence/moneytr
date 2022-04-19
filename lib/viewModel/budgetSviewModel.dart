@@ -3,23 +3,23 @@ import 'package:moneytr/services/localStorageService.dart';
 import 'package:moneytr/widgets/transactionItem.dart';
 
 class BudgetViewModel extends ChangeNotifier {
-  double getBudget() => localStorageService().getBudget();
-  double getBalance() => localStorageService().getBalance();
-  List<TransactionItem> get items => localStorageService().getAllTransactions();
+  double getBudget() => LocalStorageService().getBudget();
+  double getBalance() => LocalStorageService().getBalance();
+  List<TransactionItem> get items => LocalStorageService().getAllTransactions();
 
   set budget(double value) {
-    localStorageService().saveBudget(value);
+    LocalStorageService().saveBudget(value);
     notifyListeners();
   }
 
   void addItem(TransactionItem item) {
-    localStorageService().saveTransactionItem(item);
+    LocalStorageService().saveTransactionItem(item);
     notifyListeners();
   }
 
   void deleteItem(TransactionItem item) {
-    final localstorage = localStorageService();
-    localstorage.deleteTransactionitem;
+    final localstorage = LocalStorageService();
+    localstorage.deleteTransactionItem(item);
 
     notifyListeners();
   }

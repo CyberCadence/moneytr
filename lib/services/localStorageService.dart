@@ -1,78 +1,83 @@
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moneytr/widgets/transactionItem.dart';
 
-class localStorageService {
-  static const String transactionBoxKey = "transactionBox";
-  static const String balanceBoxKey = "balanceBoxKey";
-  static const String budgetBoxKey = "budgetBoxKey";
-  static const String deleteitem = "deleteitem";
-  static final localStorageService _instance = localStorageService._internal();
 
-  factory localStorageService() {
+
+class LocalStorageService {
+  static const String transactionsBoxKey = "transactionsBox";
+  static const String balanceBoxKey = "balanceBox";
+  static const String budgetBoxKey = "budgetBoxKey";
+
+  static final LocalStorageService _instance = LocalStorageService._internal();
+
+  factory LocalStorageService() {
     return _instance;
   }
+  LocalStorageService._internal();
+  // LocalStorageService._internal() {
+  //   initializeHive();
+  // }
 
-  localStorageService._internal();
-
-  Future<void> initializeHIve() async {
+  Future<void> initializeHive() async {
     await Hive.initFlutter();
-
     if (!Hive.isAdapterRegistered(1)) {
       Hive.registerAdapter(TransactionItemAdapter());
     }
 
-    await Hive.openBox(balanceBoxKey);
-    await Hive.openBox(transactionBoxKey);
-    await Hive.openBox(budgetBoxKey);
-    await Hive.openBox(deleteitem);
+    await Hive.openBox<double>(budgetBoxKey);
+    await Hive.openBox<TransactionItem>(transactionsBoxKey);
+    await Hive.openBox<double>(balanceBoxKey);
   }
 
   void saveTransactionItem(TransactionItem transaction) {
-    Hive.box<TransactionItem>(transactionBoxKey).add(transaction);
+    Hive.box<TransactionItem>(transactionsBoxKey).add(transaction);
     saveBalance(transaction);
   }
 
   List<TransactionItem> getAllTransactions() {
-    return Hive.box<TransactionItem>(transactionBoxKey).values.toList();
-  }
-
-  ///save?get balance method
-
-  Future<void> saveBalance(TransactionItem value) async {
-    final balanceBox = Hive.box<double>(balanceBoxKey);
-    final currentBalance = balanceBox.get("balance") ?? 0.0;
-    if (value.isExpense) {
-      balanceBox.put("balance", currentBalance + value.amount);
-    } else {
-      balanceBox.put("balance", currentBalance - value.amount);
-    }
-  }
-
-//get our balance
-
-  double getBalance() {
-    return Hive.box<double>(balanceBoxKey).get("balance") ??
-        0.0; //  0.0 if it is null value
+    return Hive.box<TransactionItem>(transactionsBoxKey).values.toList();
   }
 
   double getBudget() {
-    return Hive.box<double>(budgetBoxKey).get("budget") ?? 2000;
+    return Hive.box<double>(budgetBoxKey).get("budget") ?? 2000.0;
   }
 
-  Future<void> saveBudget(double value) {
-    return Hive.box<double>(budgetBoxKey).put("budget", value);
+  Future<void> saveBudget(double budget) {
+    return Hive.box<double>(budgetBoxKey).put("budget", budget);
   }
 
-  void deleteTransactionitem(TransactionItem item) {
-    final transactions = Hive.box<TransactionItem>(transactionBoxKey);
+  double getBalance() {
+    return Hive.box<double>(balanceBoxKey).get("balance") ?? 0.0;
+  }
+
+  Future<void> saveBalance(TransactionItem item) async {
+    final balanceBox = Hive.box<double>(balanceBoxKey);
+    final currentBalance = balanceBox.get("balance") ?? 0.0;
+    if (item.isExpense) {
+      balanceBox.put("balance", currentBalance + item.amount);
+    } else {
+      balanceBox.put("balance", currentBalance - item.amount);
+    }
+  }
+
+ 
+
+void deleteTransactionItem(TransactionItem transaction) {
+    // Get a list of our transactions
+    final transactions = Hive.box<TransactionItem>(transactionsBoxKey);
+    // Create a map out of it
     final Map<dynamic, TransactionItem> map = transactions.toMap();
-    dynamic
-        desiredkey; // for checking each  key item in map ,wheater this one is to delete
+    dynamic desiredKey;
+    // For each key in the map, we check if the transaction is the same as the one we want to delete
     map.forEach((key, value) {
-      if (value.itemTitle == item.itemTitle) item = key;
+      if (value.itemTitle == transaction.itemTitle) desiredKey = key;
     });
-    transactions.delete(desiredkey);
-
-    saveBalance(item);
+    // If we found the key, we delete it
+    transactions.delete(desiredKey);
+    // And we update the balance
+    saveBalance(transaction);
   }
+ 
 }
+

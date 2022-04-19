@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final localStorageServicee = localStorageService();
-  localStorageServicee.initializeHIve();
+  final localStorageServicee = LocalStorageService();
+  localStorageServicee.initializeHive();
   final sharedPreference = await SharedPreferences.getInstance();
   return runApp(MyApp(
     sharedPreferences: sharedPreference,

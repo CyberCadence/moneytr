@@ -103,11 +103,7 @@ class HomePage extends StatelessWidget {
                             item: value.items[index],
                           );
                         });
-                    //  List.generate(
-                    // items.length,
-                    // (index) => TransactionCard(
-                    //       item: items[index],
-                    //     )),
+                   
                   }),
                 )
               ],
