@@ -18,7 +18,7 @@ class _addTransactionState extends State<addTransaction> {
   Widget build(BuildContext context) {
     return Dialog(
       child: SizedBox(
-        width: MediaQuery.of(context).size.width / 1 / 3,
+        width: 200,
         height: 300,
         child: Padding(
           padding: const EdgeInsets.all(15.0),

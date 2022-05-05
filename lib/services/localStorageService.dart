@@ -3,7 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:moneytr/widgets/transactionItem.dart';
 
 
-
 class LocalStorageService {
   static const String transactionsBoxKey = "transactionsBox";
   static const String balanceBoxKey = "balanceBox";
@@ -61,7 +60,6 @@ class LocalStorageService {
     }
   }
 
- 
 
 void deleteTransactionItem(TransactionItem transaction) {
     // Get a list of our transactions
@@ -78,6 +76,6 @@ void deleteTransactionItem(TransactionItem transaction) {
     // And we update the balance
     saveBalance(transaction);
   }
- 
+
 }
 

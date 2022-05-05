@@ -25,17 +25,46 @@ class TransactionCard extends StatelessWidget {
         padding: const EdgeInsets.all(15.0),
         width: MediaQuery.of(context).size.width,
         child: Row(
-          children: [ const Text('delete '),const Spacer(),TextButton(onPressed: () {
-            final budgetviewModel=Provider.of<BudgetViewModel>(context,listen: false);
-            budgetviewModel.deleteItem(item);
-            Navigator.pop(context);
-          }, child: const Text('yes'),), TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("No"))
-            ,Text(
-            item.itemTitle,
+          children: [
+            TextButton(
+              onPressed: () {
+                final budgetviewModel =
+                    Provider.of<BudgetViewModel>(context, listen: false);
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton(style:  TextButton.styleFrom(backgroundColor: Colors.blueAccent),
+                                    onPressed: () {
+                                      budgetviewModel.deleteItem(item);
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('yes')),
+                               const SizedBox(width: 10,), TextButton(style:  TextButton.styleFrom(backgroundColor: Colors.blueAccent)
+                                   , onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('no'))
+                              ],
+                            ),
+                            height: 100,
+                            width: 50),
+                      );
+                    });
+
+                // budgetviewModel.deleteItem(item);
+              },
+              child: const Text('delete item'),
+            ),
+            const Spacer(),
+            Text(
+              item.itemTitle,
               style: const TextStyle(
                 fontSize: 18,
               ),

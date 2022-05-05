@@ -48,7 +48,7 @@ class _HomeeState extends State<Homee> {
               },
               icon: const Icon(Icons.attach_money))
         ],
-        title: const Text('Money Track app'),
+        title: const Center(child: Text('The Budget Tracker')),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentPageIndex,

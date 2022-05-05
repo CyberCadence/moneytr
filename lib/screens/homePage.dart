@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+ 
 import 'package:moneytr/viewModel/budgetSviewModel.dart';
 import 'package:moneytr/widgets/addTransaction.dart';
-import 'package:moneytr/widgets/transactionItem.dart';
+ 
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../services/theme_services.dart';
 import '../widgets/tracnsactionCard.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,7 +14,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final themeService = Provider.of<ThemeService>(context);
+     
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -24,9 +27,7 @@ class HomePage extends StatelessWidget {
                     final budgetService =
                         Provider.of<BudgetViewModel>(context, listen: false);
                     budgetService.addItem(transactionItem);
-                    // setState(() {
-                    //   items.add(transactionItem);
-                    // });
+                     
                   },
                 );
               });
@@ -37,7 +38,7 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: SizedBox(
-            width: screenSize.width,
+            width: MediaQuery.of(context).size.width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,10 +57,10 @@ class HomePage extends StatelessWidget {
                         }
 
                         return CircularPercentIndicator(
-                          radius: screenSize.width / 2,
+                          radius:  MediaQuery.of(context).size.width>=650?200:MediaQuery.of(context).size.width/2,
                           lineWidth: 10.0,
-                          percent: percentage ,
-                          backgroundColor: Colors.white,
+                          percent: percentage,
+                          backgroundColor: themeService.darkTheme?Colors.white:Colors.blueAccent,
                           center: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -103,7 +104,6 @@ class HomePage extends StatelessWidget {
                             item: value.items[index],
                           );
                         });
-                   
                   }),
                 )
               ],
@@ -113,4 +113,11 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+
+
+  
 }
+
+ 
+ 
