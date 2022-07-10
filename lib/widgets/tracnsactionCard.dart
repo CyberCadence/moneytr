@@ -36,18 +36,29 @@ class TransactionCard extends StatelessWidget {
                       return Dialog(
                         child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.black54,
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                              gradient: LinearGradient(colors: [
+                                Colors.black38,
+                                Colors.white.withOpacity(0.4)
+                              ]),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                TextButton(style:  TextButton.styleFrom(backgroundColor: Colors.blueAccent),
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: StadiumBorder()),
                                     onPressed: () {
                                       budgetviewModel.deleteItem(item);
                                       Navigator.pop(context);
                                     },
                                     child: const Text('yes')),
-                               const SizedBox(width: 10,), TextButton(style:  TextButton.styleFrom(backgroundColor: Colors.blueAccent)
-                                   , onPressed: () {
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        shape: StadiumBorder()),
+                                    onPressed: () {
                                       Navigator.pop(context);
                                     },
                                     child: const Text('no'))

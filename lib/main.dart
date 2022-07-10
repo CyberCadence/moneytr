@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final localStorageServicee = LocalStorageService();
- await  localStorageServicee.initializeHive();
+  await localStorageServicee.initializeHive();
   final sharedPreference = await SharedPreferences.getInstance();
   return runApp(MyApp(
     sharedPreferences: sharedPreference,
@@ -28,7 +28,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider<ThemeService>(
               create: (_) => ThemeService(sharedPreferences)),
-          ChangeNotifierProvider<BudgetViewModel>(create: (_) => BudgetViewModel())
+          ChangeNotifierProvider<BudgetViewModel>(
+              create: (_) => BudgetViewModel())
         ],
         child: Builder(
           builder: (BuildContext context) {

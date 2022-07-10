@@ -17,8 +17,11 @@ class _addTransactionState extends State<addTransaction> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: SizedBox(
-        width: 200,
+      child: Container( decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [Colors.black38, Colors.white.withOpacity(0.4)]),
+        ),
+        width: MediaQuery.of(context).size.width/1.3,
         height: 300,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -72,8 +75,13 @@ class _addTransactionState extends State<addTransaction> {
                       Navigator.pop(context);
                     }
                   },
-                  child: const Text('Add'))
-            ],
+                  child: const Text('Add'),
+                  style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.white38),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0))))
+           ) ],
           ),
         ),
       ),
@@ -93,9 +101,12 @@ class _addBudgetWidgetState extends State<addBudgetWidget> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width / 1 / 3,
-        height: 300,
+      child: Container( decoration: BoxDecoration(
+        gradient: LinearGradient(
+            colors: [Colors.black38, Colors.white.withOpacity(0.4)]),
+      )
+        ,width: 100,
+        height: 180,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -116,9 +127,13 @@ class _addBudgetWidgetState extends State<addBudgetWidget> {
                 decoration: const InputDecoration(hintText: 'add your budget'),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
-              ElevatedButton(
+              ElevatedButton(style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.white38),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0)))),
                   onPressed: () {
                     if (_budgetTracker.text.isNotEmpty) {
                       widget.budgettoAdd(double.parse(_budgetTracker.text));
