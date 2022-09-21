@@ -5,7 +5,7 @@
 * Dual UI mode with dark mode enabled.
 * Shared preference  for  dark mode  settings
 * state management with provider state management
-* Hive DB enabled
+* Hive DB 
 * Singleton pattern used 
 ## Screenshots
 
